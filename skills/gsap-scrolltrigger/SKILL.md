@@ -267,7 +267,7 @@ ScrollTrigger.getById("my-id")?.kill();
 
 In React, use the `useGSAP()` hook (@gsap/react NPM package) to ensure proper cleanup automatically, or manually kill in a cleanup (e.g. in useEffect return) when the component unmounts.
 
-## Best practices
+## Official GSAP best practices
 
 - ✅ **gsap.registerPlugin(ScrollTrigger)** once before any ScrollTrigger usage.
 - ✅ Call **ScrollTrigger.refresh()** after DOM/layout changes (new content, images, fonts) that affect trigger positions. Whenever the viewport is resized, `ScrollTrigger.refresh()` is automatically called (debounced 200ms)

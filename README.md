@@ -58,6 +58,14 @@ Clone this repo and copy the skill folders into the appropriate directory for yo
 gsap-skills/
   README.md
   AGENTS.md          # Guidance for agents editing this repo
+  .github/
+    copilot-instructions.md   # Repo-wide instructions for GitHub Copilot
+    instructions/             # Path-specific Copilot instructions
+      react.instructions.md
+      scrolltrigger.instructions.md
+  .claude-plugin/    # Claude Code plugin config (plugin.json, marketplace.json)
+  .cursor-plugin/    # Cursor plugin config (plugin.json, marketplace.json)
+  assets/            # Logo and icon assets (e.g. gsap-green.svg, gsap-icon-square.svg)
   skills/
     gsap-core/       SKILL.md
     gsap-timeline/   SKILL.md
@@ -68,10 +76,22 @@ gsap-skills/
     gsap-performance/  SKILL.md
 ```
 
+## GitHub Copilot
+
+**Copilot does not automatically use Cursor/Claude skill files.** To give GitHub Copilot GSAP-aware guidance in a repo that uses this project (or in this repo), use Copilot’s own instruction files:
+
+- **Repository-wide:** [`.github/copilot-instructions.md`](.github/copilot-instructions.md) — imports, timelines, transforms, from()/fromTo(), ScrollTrigger, React, cleanup.
+- **Path-specific:** [`.github/instructions/`](.github/instructions/) — `react.instructions.md` (React/JSX/TSX), `scrolltrigger.instructions.md` (scroll-related files). These apply when the file path matches the configured globs.
+
+The instruction files are kept **concise and actionable** (bullets, not full reference) so Copilot can use them reliably; GitHub’s code review feature only uses the first 4,000 characters of each file. For full guidance (config tables, examples, Do Not / Best practices), use the **skills** in `skills/` with an agent that supports the Agent Skills format (Cursor, Claude Code, etc.), or install this repo as a skill.
+
+Copy or adapt the `.github/` files into your repository so Copilot uses them. See [GitHub’s custom instructions docs](https://docs.github.com/en/copilot/concepts/response-customization).
+
 ## Compatibility
 
 - **[skills CLI](https://github.com/vercel-labs/skills)** — installs into Cursor, Claude Code, Codex, Windsurf, GitHub Copilot, and [40+ agents](https://github.com/vercel-labs/skills#supported-agents)
 - **[Agent Skills spec](https://agentskills.io/specification.md)** — SKILL.md format and discovery
+- **GitHub Copilot** — use `.github/copilot-instructions.md` and optional `.github/instructions/*.instructions.md` (included in this repo)
 
 ## License
 

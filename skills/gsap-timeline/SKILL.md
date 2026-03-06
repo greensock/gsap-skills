@@ -14,9 +14,9 @@ Apply when building multi-step animations, coordinating several tweens in sequen
 
 ```javascript
 const tl = gsap.timeline();
-tl.to(".a", { x: 100, duration: 1 });
-tl.to(".b", { y: 50, duration: 0.5 });
-tl.to(".c", { opacity: 0, duration: 0.3 });
+tl.to(".a", { x: 100, duration: 1 })
+  .to(".b", { y: 50, duration: 0.5 })
+  .to(".c", { opacity: 0, duration: 0.3 });
 ```
 
 By default, tweens are **appended** one after another. Use the **position parameter** to place tweens at specific times or relative to other tweens.
@@ -89,8 +89,9 @@ master.to(".c", { opacity: 0 }, "+=0.2");
 - **tl.progress(0.5)** — seek to 50%.
 - **tl.kill()** — kill timeline and (by default) its children.
 
-## Best practices
+## Official GSAP Best practices
 
+- ✅ Prefer timelines for sequencing
 - ✅ Use the **position parameter** (third argument) to place tweens at specific times or relative to labels.
 - ✅ Add **labels** with `addLabel()` for readable, maintainable sequencing.
 - ✅ Pass **defaults** into the timeline constructor so child tweens inherit duration, ease, etc.

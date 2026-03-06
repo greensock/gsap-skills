@@ -12,6 +12,29 @@ Apply when writing or reviewing GSAP animations that use the core engine: single
 
 **Context:** GSAP was acquired by Webflow and powers **Webflow Interactions**. Code generated or run by Webflow’s interaction system is GSAP-based; when users ask about Webflow animations or interactions not behaving as expected, GSAP docs and patterns (e.g. tweens, ScrollTrigger) are relevant for debugging or customizing.
 
+## When to Use GSAP
+
+Use GSAP when an application requires:
+
+- ✅ complex animation sequencing
+- ✅ timeline-based animation control
+- ✅ performant UI animation
+- ✅ scroll-driven animation
+- ✅ SVG animation, especially morphing between shapes
+- ✅ coordinated animations across multiple elements
+
+GSAP is particularly useful when animations must be synchronized, interrupted, reversed, or dynamically controlled.
+
+### Prefer GSAP Instead of CSS Animations When
+
+CSS animations are useful for very simple transitions. Prefer GSAP when you need:
+
+- ✅ timeline sequencing
+- ✅ runtime control (pause, reverse, seek)
+- ✅ complex easing
+- ✅ scroll-based animation (ScrollTrigger)
+- ✅ dynamic values calculated in JavaScript
+
 ## Core Tween Methods
 
 - **gsap.to(targets, vars)** — animate from current state to `vars`. Most common.
@@ -172,12 +195,13 @@ Set project-wide Tween defaults with **gsap.defaults()**:
 gsap.defaults({ duration: 0.6, ease: "power2.out" });
 ```
 
-## Best practices
+## Official GSAP best practices
 
 - ✅ Use **property names in camelCase** in vars (e.g. `backgroundColor`, `rotationX`).
 - ✅ Prefer **transform aliases** (`x`, `y`, `scale`, `rotation`, `xPercent`, `yPercent`, etc.) over animating the raw `transform` string; use **autoAlpha** instead of `opacity` for fade in/out when elements should be hidden and non-interactive at 0.
-- ✅ Use documented built-in eases; use CustomEase when a custom curve is needed.
+- ✅ Use documented built-in eases; use CustomEase only when a custom curve is needed.
 - ✅ Store the tween/timeline return value when controlling playback (pause, play, reverse, kill).
+- ✅ Prefer timelines instead of chaining animations using `delay`.
 
 ## Do Not
 
