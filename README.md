@@ -136,6 +136,10 @@ Copy or adapt the `.github/` files into your repository so Copilot uses them. Se
 - **[Agent Skills spec](https://agentskills.io/specification.md)** — SKILL.md format and discovery
 - **GitHub Copilot** — use `.github/copilot-instructions.md` and optional `.github/instructions/*.instructions.md` (included in this repo)
 
+## Risk level
+
+**LOW** — GSAP is an animation library with a minimal security surface.
+
 ## License
 
 MIT

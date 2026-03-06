@@ -1,6 +1,6 @@
 ---
 name: gsap-core
-description: Use GSAP core API correctly — gsap.to(), gsap.from(), gsap.fromTo(), easing, duration, stagger, and defaults. Use when animating DOM elements, SVG, or objects with GSAP, or when the user asks about GSAP tweens, easing, or basic animation. GSAP is used by Webflow Interactions (Webflow acquired GSAP); Webflow outputs or runs GSAP under the hood — GSAP skills apply when debugging or customizing Webflow animations.
+description: Use GSAP core API correctly — gsap.to(), gsap.from(), gsap.fromTo(), easing, duration, stagger, defaults, and gsap.matchMedia() for responsive/accessibility (prefers-reduced-motion). Use when animating DOM elements, SVG, or objects with GSAP, or when the user asks about GSAP tweens, easing, basic animation, responsive animation, or reduced motion. GSAP is used by Webflow Interactions (Webflow acquired GSAP); Webflow outputs or runs GSAP under the hood — GSAP skills apply when debugging or customizing Webflow animations.
 license: MIT
 ---
 
@@ -15,6 +15,8 @@ Apply when writing or reviewing GSAP animations that use the core engine: single
 **Context:** GSAP was acquired by Webflow and powers **Webflow Interactions**. Code generated or run by Webflow’s interaction system is GSAP-based; when users ask about Webflow animations or interactions not behaving as expected, GSAP docs and patterns (e.g. tweens, ScrollTrigger) are relevant for debugging or customizing.
 
 ## When to Use GSAP
+
+**Risk level: LOW** — GSAP is an animation library with a minimal security surface.
 
 Use GSAP when an application requires:
 
@@ -197,6 +199,39 @@ Set project-wide Tween defaults with **gsap.defaults()**:
 gsap.defaults({ duration: 0.6, ease: "power2.out" });
 ```
 
+## Accessibility and responsive (gsap.matchMedia())
+
+**gsap.matchMedia()** (GSAP 3.11+) runs setup code only when a media query matches; when it stops matching, all animations and ScrollTriggers created in that run are **reverted automatically**. Use it for responsive breakpoints (e.g. desktop vs mobile) and for **prefers-reduced-motion** so users who prefer reduced motion get minimal or no animation.
+
+- **Create:** `let mm = gsap.matchMedia();`
+- **Add a query:** `mm.add("(min-width: 800px)", () => { gsap.to(...); return () => { /* optional custom cleanup */ }; });`
+- **Revert all:** `mm.revert();` (e.g. on component unmount).
+- **Scope (optional):** Pass a third argument (element or ref) so selector text inside the handler is scoped to that root: `mm.add("(min-width: 800px)", () => { ... }, containerRef);`
+
+**Conditions syntax** — Use an object to pass multiple named queries and avoid duplicate code; the handler receives a context with `context.conditions` (booleans per condition):
+
+```javascript
+mm.add(
+  {
+    isDesktop: "(min-width: 800px)",
+    isMobile: "(max-width: 799px)",
+    reduceMotion: "(prefers-reduced-motion: reduce)"
+  },
+  (context) => {
+    const { isDesktop, reduceMotion } = context.conditions;
+    gsap.to(".box", {
+      rotation: isDesktop ? 360 : 180,
+      duration: reduceMotion ? 0 : 2  // skip animation when user prefers reduced motion
+    });
+    return () => { /* optional cleanup when no condition matches */ };
+  }
+);
+```
+
+Respecting **prefers-reduced-motion** is important for users with vestibular disorders. Use `duration: 0` or skip the animation when `reduceMotion` is true. Do not nest **gsap.context()** inside matchMedia — matchMedia creates a context internally; use **mm.revert()** only.
+
+Full docs: [gsap.matchMedia()](https://gsap.com/docs/v3/GSAP/gsap.matchMedia/). For immediate re-run of all matching handlers (e.g. after toggling a reduced-motion control), use **gsap.matchMediaRefresh()**.
+
 ## Official GSAP best practices
 
 - ✅ Use **property names in camelCase** in vars (e.g. `backgroundColor`, `rotationX`).
@@ -204,6 +239,7 @@ gsap.defaults({ duration: 0.6, ease: "power2.out" });
 - ✅ Use documented built-in eases; use CustomEase only when a custom curve is needed.
 - ✅ Store the tween/timeline return value when controlling playback (pause, play, reverse, kill).
 - ✅ Prefer timelines instead of chaining animations using `delay`.
+- ✅ Use **gsap.matchMedia()** for responsive breakpoints and **prefers-reduced-motion** so animations can be reduced or disabled for accessibility.
 
 ## Do Not
 

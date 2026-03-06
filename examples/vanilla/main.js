@@ -7,7 +7,7 @@ import { ScrollTrigger } from "https://cdn.jsdelivr.net/npm/gsap@3.14.2/ScrollTr
 
 gsap.registerPlugin(ScrollTrigger);
 
-// 1. Single tween — transform alias x, autoAlpha
+// 1. Single tween — transform alias x, autoAlpha (opacity + visibility)
 gsap.to("#single", {
   x: 120,
   autoAlpha: 1,

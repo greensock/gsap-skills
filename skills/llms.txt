@@ -5,8 +5,8 @@ Use this file to discover which skill to load. Each skill lives in a directory o
 ## Skills
 
 gsap-core
-  Core API: gsap.to(), from(), fromTo(), easing, duration, stagger, defaults, transforms, autoAlpha.
-  Triggers: GSAP tweens, easing, stagger, basic animation, Webflow interactions, transform, opacity.
+  Core API: gsap.to(), from(), fromTo(), easing, duration, stagger, defaults, transforms, autoAlpha, gsap.matchMedia() (responsive, prefers-reduced-motion).
+  Triggers: GSAP tweens, easing, stagger, basic animation, Webflow interactions, transform, opacity, responsive, accessibility, reduced motion, matchMedia.
 
 gsap-timeline
   Timelines: gsap.timeline(), position parameter, labels, nesting, playback.
