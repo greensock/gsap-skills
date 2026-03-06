@@ -10,6 +10,8 @@ license: MIT
 
 Apply when implementing scroll-driven animations: triggering tweens/timelines on scroll, pinning elements, scrubbing animation to scroll position, or when the user mentions ScrollTrigger, scroll animations, or pinning.
 
+**Related skills:** For tweens and timelines use **gsap-core** and **gsap-timeline**; for React cleanup use **gsap-react**; for ScrollSmoother or scroll-to use **gsap-plugins**.
+
 ## Registering the Plugin
 
 ScrollTrigger is a plugin. After loading the script, register it once:
@@ -278,7 +280,9 @@ In React, use the `useGSAP()` hook (@gsap/react NPM package) to ensure proper cl
 
 ## Do Not
 
-- ❌ Nest ScrollTriggered animations inside of a parent timeline. ScrollTriggers should only exist on top-level animations. Wrong: `gsap.timeline().to(..., {scrollTrigger: {...}})`. Correct: `gsap.timeline({scrollTrigger: {...}}).to(...)` (the tween inside the timeline shouldn't have a ScrollTrigger).
+- ❌ Put ScrollTrigger on a **child tween** when it's part of a timeline; put it on the **timeline** or a **top-level tween** only. Wrong: `gsap.timeline().to(".a", { scrollTrigger: {...} })`. Correct: `gsap.timeline({ scrollTrigger: {...} }).to(".a", { x: 100 })`.
+- ❌ Forget to call **ScrollTrigger.refresh()** after DOM/layout changes (new content, images, fonts) that affect trigger positions; viewport resize is auto-handled, but dynamic content is not.
+- ❌ Nest ScrollTriggered animations inside of a parent timeline. ScrollTriggers should only exist on top-level animations.
 - ❌ Forget to **gsap.registerPlugin(ScrollTrigger)** before using ScrollTrigger.
 - ❌ Use **scrub** and **toggleActions** together on the same ScrollTrigger; choose one behavior. If both exist, **scrub** wins.
 - ❌ Use an ease other than **"none"** on the horizontal animation when using **containerAnimation** for fake horizontal scroll; it breaks the 1:1 scroll-to-position mapping.

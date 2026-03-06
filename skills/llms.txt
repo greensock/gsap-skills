@@ -1,0 +1,37 @@
+# GSAP Skills — Index for AI Agents
+
+Use this file to discover which skill to load. Each skill lives in a directory of the same name under skills/ and contains SKILL.md.
+
+## Skills
+
+gsap-core
+  Core API: gsap.to(), from(), fromTo(), easing, duration, stagger, defaults, transforms, autoAlpha.
+  Triggers: GSAP tweens, easing, stagger, basic animation, Webflow interactions, transform, opacity.
+
+gsap-timeline
+  Timelines: gsap.timeline(), position parameter, labels, nesting, playback.
+  Triggers: sequencing, timeline, keyframes, choreograph, multi-step animation, animation order.
+
+gsap-scrolltrigger
+  ScrollTrigger: scroll-linked animations, pinning, scrub, triggers, refresh, cleanup.
+  Triggers: scroll animation, ScrollTrigger, pin, parallax, scroll-driven, scrub.
+
+gsap-plugins
+  Plugins: ScrollToPlugin, ScrollSmoother, Flip, Draggable, Inertia, Observer, SplitText, ScrambleText, SVG/physics, CustomEase, EasePack, GSDevTools.
+  Triggers: plugin, scroll-to, flip, draggable, SVG drawing, MorphSVG, DrawSVG, MotionPath, SplitText, ScrambleText, CustomEase, registerPlugin.
+
+gsap-utils
+  gsap.utils: clamp, mapRange, normalize, interpolate, random, snap, toArray, wrap, pipe.
+  Triggers: gsap.utils, clamp, mapRange, random, snap, toArray, wrap, interpolation.
+
+gsap-react
+  React: useGSAP hook, refs, gsap.context(), cleanup, SSR.
+  Triggers: React, Next.js, useGSAP, cleanup on unmount, GSAP React.
+
+gsap-performance
+  Performance: transforms, will-change, batching, ScrollTrigger tips.
+  Triggers: performance, 60fps, jank, animation performance, optimize.
+
+gsap-frameworks
+  Vue, Svelte, and other frameworks: lifecycle, when to create/kill tweens and ScrollTriggers, scoping selectors, cleanup on unmount.
+  Triggers: Vue, Svelte, Nuxt, SvelteKit, framework, lifecycle, onMounted, onUnmounted.

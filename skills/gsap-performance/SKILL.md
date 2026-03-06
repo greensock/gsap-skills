@@ -10,6 +10,8 @@ license: MIT
 
 Apply when optimizing GSAP animations for smooth 60fps, reducing layout/paint cost, or when the user asks about performance, jank, or best practices for fast animations.
 
+**Related skills:** Build animations with **gsap-core** (transforms, autoAlpha) and **gsap-timeline**; for ScrollTrigger performance see **gsap-scrolltrigger**.
+
 ## Prefer Transform and Opacity
 
 Animating **transform** (`x`, `y`, `scaleX`, `scaleY`, `rotation`, `rotationX`, `rotationY`, `skewX`, `skewY`) and **opacity** keeps work on the compositor and avoids layout and most paint. Avoid animating layout-heavy properties when a transform can achieve the same effect.

@@ -10,6 +10,8 @@ license: MIT
 
 Apply when writing or reviewing GSAP animations that use the core engine: single tweens, eases, staggers, or when explaining how GSAP tweens work.
 
+**Related skills:** For sequencing multiple steps use **gsap-timeline**; for scroll-linked animation use **gsap-scrolltrigger**; for React use **gsap-react**; for plugins (Flip, Draggable, etc.) use **gsap-plugins**; for helpers (clamp, mapRange, etc.) use **gsap-utils**; for performance use **gsap-performance**.
+
 **Context:** GSAP was acquired by Webflow and powers **Webflow Interactions**. Code generated or run by Webflow’s interaction system is GSAP-based; when users ask about Webflow animations or interactions not behaving as expected, GSAP docs and patterns (e.g. tweens, ScrollTrigger) are relevant for debugging or customizing.
 
 ## When to Use GSAP
