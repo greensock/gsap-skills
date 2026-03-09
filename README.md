@@ -1,3 +1,4 @@
+```text
    ██████╗ ███████╗ █████╗ ██████╗
   ██╔════╝ ██╔════╝██╔══██╗██╔══██╗
   ██║  ███╗███████╗███████║██████╔╝
@@ -5,12 +6,9 @@
   ╚██████╔╝███████║██║  ██║██║
    ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝
 
-┌──────────────────────────────────────┐
-│   GreenSock Animation Platform       │
-│   AI Skills for Claude • Cursor      │
-│   • Copilot • LLM Coding Assistants  │
-└──────────────────────────────────────┘
-
+  ──●────●────●────●────●────●──
+   AI Skills for Claude • Cursor • Copilot
+```
 GSAP Timeline → Tweens → ScrollTrigger → MotionPath → Flip → more...
 
 # GSAP AI Skills
