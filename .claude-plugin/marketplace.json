@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "gsap-skills",
-      "description": "Teach AI agents correct GSAP usage including tweens, timelines, ScrollTrigger, plugins, utilities, React hooks, and performance optimization",
+      "description": "Official GSAP skills for Cursor, Claude and other AI agents, covering tweens, timelines, ScrollTrigger, plugins, utilities, React hooks, and performance optimization",
       "author": {
         "name": "GreenSock"
       },

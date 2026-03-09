@@ -1,6 +1,6 @@
 ---
 name: gsap-react
-description: Use GSAP correctly in React — useGSAP hook, refs, gsap.context(), and cleanup. Use when animating in React, Next.js, or when the user asks about GSAP with React, useGSAP, or cleanup on unmount.
+description: Official GSAP skill for using GSAP correctly in React — useGSAP hook, refs, gsap.context(), and cleanup. Use when animating in React, Next.js, or when the user asks about GSAP with React, useGSAP, or cleanup on unmount.
 license: MIT
 ---
 

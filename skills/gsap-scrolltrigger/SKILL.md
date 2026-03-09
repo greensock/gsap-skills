@@ -1,6 +1,6 @@
 ---
 name: gsap-scrolltrigger
-description: Use ScrollTrigger for scroll-linked animations, pinning, scrub, and triggers. Use when building scroll-based animations, parallax, pinned sections, or when the user asks about ScrollTrigger, scroll animations, or pinning with GSAP.
+description: Official GSAP skill for using ScrollTrigger for scroll-linked animations, pinning, scrub, and triggers. Use when building scroll-based animations, parallax, pinned sections, or when the user asks about ScrollTrigger, scroll animations, or pinning with GSAP.
 license: MIT
 ---
 

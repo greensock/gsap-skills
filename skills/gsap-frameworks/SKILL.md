@@ -1,6 +1,6 @@
 ---
 name: gsap-frameworks
-description: Use GSAP correctly in Vue, Svelte, and other non-React frameworks — lifecycle (when to create/kill tweens and ScrollTriggers), scoping selectors, cleanup on unmount. Use when animating in Vue, Nuxt, Svelte, SvelteKit, or when the user asks about GSAP with Vue, Svelte, onMounted, onUnmounted, onMount, onDestroy.
+description: Use GSAP correctly in Vue, Svelte, and other non-React frameworks — lifecycle (when to create/kill tweens and ScrollTriggers), scoping selectors, cleanup on unmount. Use when animating in Vue, Nuxt, Svelte, SvelteKit, or when the user asks about GSAP with Vue, Svelte, onMounted, onUnmounted, onMount, onDestroy. There is a separate dedicated gsap-react skill for using GSAP in React.
 license: MIT
 ---
 

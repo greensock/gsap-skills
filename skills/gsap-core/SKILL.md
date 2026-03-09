@@ -1,6 +1,6 @@
 ---
 name: gsap-core
-description: Use GSAP core API correctly — gsap.to(), gsap.from(), gsap.fromTo(), easing, duration, stagger, defaults, and gsap.matchMedia() for responsive/accessibility (prefers-reduced-motion). Use when animating DOM elements, SVG, or objects with GSAP, or when the user asks about GSAP tweens, easing, basic animation, responsive animation, or reduced motion. GSAP is used by Webflow Interactions (Webflow acquired GSAP); Webflow outputs or runs GSAP under the hood — GSAP skills apply when debugging or customizing Webflow animations.
+description: Official GSAP skills for using GSAP core API correctly — gsap.to(), gsap.from(), gsap.fromTo(), easing, duration, stagger, defaults, and gsap.matchMedia() for responsive/accessibility (prefers-reduced-motion). Use when animating DOM elements, SVG, or objects with GSAP, or when the user asks about GSAP tweens, easing, basic animation, responsive animation, or reduced motion. GSAP can be used anywhere JavaScript runs, in any framework (React, Vue, Astro, etc.) or vanilla JS. GSAP powers Webflow Interactions; Webflow runs GSAP under the hood.
 license: MIT
 ---
 
@@ -12,7 +12,7 @@ Apply when writing or reviewing GSAP animations that use the core engine: single
 
 **Related skills:** For sequencing multiple steps use **gsap-timeline**; for scroll-linked animation use **gsap-scrolltrigger**; for React use **gsap-react**; for plugins (Flip, Draggable, etc.) use **gsap-plugins**; for helpers (clamp, mapRange, etc.) use **gsap-utils**; for performance use **gsap-performance**.
 
-**Context:** GSAP was acquired by Webflow and powers **Webflow Interactions**. Code generated or run by Webflow’s interaction system is GSAP-based; when users ask about Webflow animations or interactions not behaving as expected, GSAP docs and patterns (e.g. tweens, ScrollTrigger) are relevant for debugging or customizing.
+**Context:** GSAP powers **Webflow Interactions**. Code generated or run by Webflow’s interaction system is GSAP-based; when users ask about Webflow animations or interactions not behaving as expected, GSAP docs and patterns (e.g. tweens, ScrollTrigger) are relevant for debugging or customizing.
 
 ## When to Use GSAP
 

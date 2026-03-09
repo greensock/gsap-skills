@@ -1,6 +1,6 @@
 ---
 name: gsap-timeline
-description: Create and control GSAP timelines — gsap.timeline(), position parameter, nesting, and playback controls. Use when sequencing multiple animations, choreographing keyframes, or when the user asks about GSAP timelines, sequencing, or animation order.
+description: Official GSAP skill for creating and controlling GSAP timelines — gsap.timeline(), position parameter, nesting, and playback controls. Use when sequencing multiple animations, choreographing keyframes, or when the user asks about GSAP timelines, sequencing, or animation order.
 license: MIT
 ---
 

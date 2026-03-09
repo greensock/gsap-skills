@@ -1,6 +1,6 @@
 # gsap-skills
 
-Official AI skills for GSAP. These skills teach AI coding agents how to correctly use the GSAP (GreenSock Animation Platform), including best practices, common animation patterns, and plugin usage.
+Official AI skills for GSAP. These skills teach AI coding agents how to correctly use the GSAP (GreenSock Animation Platform), including best practices, common animation patterns, plugin usage, performance optimization, as well as usage in frameworks like React, Vue, and others.
 
 Skills follow the [Agent Skills](https://agentskills.io) format and work with the [skills](https://github.com/vercel-labs/skills) CLI (Cursor, Claude Code, Codex, Windsurf, GitHub Copilot, and others).
 

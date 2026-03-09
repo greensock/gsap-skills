@@ -11,14 +11,12 @@
   "keywords": [
     "gsap",
     "greensock",
-    "animation",
+    "javascript animation",
     "scrolltrigger",
     "timeline",
     "react animation",
-    "performance",
-    "tweens",
-    "plugins"
+    "web animation"
   ],
-  "logo": "./assets/gsap-icon-square.svg",
+  "logo": "./assets/gsap-icon-inverted.svg",
   "skills": ["skills"]
 }

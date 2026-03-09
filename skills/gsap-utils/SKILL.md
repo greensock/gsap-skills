@@ -1,6 +1,6 @@
 ---
 name: gsap-utils
-description: Use gsap.utils for clamping, distribution, interpolation, mapping, random, snapping, arrays, and strings. Use when the user asks about gsap.utils, clamp, mapRange, random, snap, toArray, wrap, or helper utilities in GSAP.
+description: Official GSAP skill for using gsap.utils for clamping, distribution, interpolation, mapping, random, snapping, arrays, and strings. Use when the user asks about gsap.utils or utility functions, clamp, mapRange, random, snap, toArray, wrap, or helper utilities in GSAP.
 license: MIT
 ---
 
