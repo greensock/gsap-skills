@@ -18,44 +18,11 @@ Apply when writing or reviewing GSAP code in Vue (or Nuxt), Svelte (or SvelteKit
 - **Kill or revert** them in the **unmount** (or equivalent) cleanup so nothing runs on detached nodes and there are no leaks.
 - **Scope selectors** to the component root so `.box` and similar only match elements inside that component, not the rest of the page.
 
-## Vue 3 (Composition API)
+## Vue 3
 
-Use **onMounted** to run GSAP after the component is in the DOM. Use **onUnmounted** to clean up.
+> See `examples/vue/` for a runnable Vite + Vue 3 project demonstrating these patterns.
 
-```javascript
-import { onMounted, onUnmounted, ref } from "vue";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger); // once per app, e.g. in main.js
-
-export default {
-  setup() {
-    const container = ref(null);
-    let ctx;
-
-    onMounted(() => {
-      if (!container.value) return;
-      ctx = gsap.context(() => {
-        gsap.to(".box", { x: 100, duration: 0.6 });
-        gsap.from(".item", { autoAlpha: 0, y: 20, stagger: 0.1 });
-      }, container.value);
-    });
-
-    onUnmounted(() => {
-      ctx?.revert();
-    });
-
-    return { container };
-  }
-};
-```
-
-- ✅ **gsap.context(scope)** — pass the container ref (e.g. `container.value`) as the second argument so selectors like `.item` are scoped to that root. All animations and ScrollTriggers created inside the callback are tracked and reverted when **ctx.revert()** is called.
-- ✅ **onUnmounted** — always call **ctx.revert()** so tweens and ScrollTriggers are killed and inline styles reverted.
-
-## Vue 3 (script setup)
-
-Same idea with `<script setup>` and refs:
+Use `<script setup>` (recommended) with **onMounted** to run GSAP after the DOM is ready and **onUnmounted** for cleanup:
 
 ```javascript
 <script setup>
@@ -69,8 +36,8 @@ let ctx;
 onMounted(() => {
   if (!container.value) return;
   ctx = gsap.context(() => {
-    gsap.to(".box", { x: 100 });
-    gsap.from(".item", { autoAlpha: 0, stagger: 0.1 });
+    gsap.to(".box", { x: 100, duration: 0.6 });
+    gsap.from(".item", { autoAlpha: 0, y: 20, stagger: 0.1 });
   }, container.value);
 });
 
@@ -86,6 +53,47 @@ onUnmounted(() => {
   </div>
 </template>
 ```
+
+- ✅ **gsap.context(scope)** — pass the container ref (e.g. `container.value`) as the second argument so selectors like `.item` are scoped to that root. All animations and ScrollTriggers created inside the callback are tracked and reverted when **ctx.revert()** is called.
+- ✅ **onUnmounted** — always call **ctx.revert()** so tweens and ScrollTriggers are killed and inline styles reverted.
+
+## Nuxt 3
+
+> See `examples/nuxt/` for a runnable Nuxt 3 project with plugin registration, lazy loading, and SSR-safe patterns.
+
+Use a **client-only plugin** (`.client.ts` suffix) to register GSAP — it never runs on the server:
+
+```typescript
+// plugins/gsap.client.ts
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+export default defineNuxtPlugin(() => {
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Lazy-load heavy plugins only when needed (keeps initial bundle small)
+  const lazyLoadSplitText = () =>
+    import("gsap/SplitText").then((m) => {
+      gsap.registerPlugin(m.SplitText);
+      return m.SplitText;
+    });
+
+  return {
+    provide: { gsap, ScrollTrigger, lazyLoadSplitText },
+  };
+});
+```
+
+Access in components via `useNuxtApp()`:
+
+```javascript
+const { $gsap: gsap, $ScrollTrigger: ScrollTrigger } = useNuxtApp();
+```
+
+- ✅ **`.client.ts` suffix** ensures the plugin only runs in the browser (SSR-safe). Never import GSAP in server-rendered code.
+- ✅ **`useNuxtApp()`** provides typed access to the gsap instance and lazy loaders.
+- ✅ **Lazy-load heavy plugins** (SplitText, MorphSVG, etc.) to reduce initial bundle size.
+- ✅ Use **gsap.context(scope)** and **onUnmounted → ctx.revert()** in components, same as Vue 3.
 
 ## Svelte
 
