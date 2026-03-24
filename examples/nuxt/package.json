@@ -1,0 +1,14 @@
+{
+  "name": "gsap-nuxt-example",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build"
+  },
+  "dependencies": {
+    "gsap": "^3.12.0"
+  },
+  "devDependencies": {
+    "nuxt": "^3.14.0"
+  }
+}
