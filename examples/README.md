@@ -1,6 +1,6 @@
 # GSAP skills — reference examples
 
-Minimal demos that follow the skills exactly: transforms, autoAlpha, timelines, ScrollTrigger, and (in React) useGSAP with scope and cleanup.
+Minimal demos that follow the skills exactly: transforms, autoAlpha, timelines, ScrollTrigger, and framework-specific patterns (useGSAP in React, onMount/onUnmount with gsap.context in Vue/Nuxt).
 
 ## Vanilla (HTML + JS)
 
@@ -15,3 +15,15 @@ Minimal demos that follow the skills exactly: transforms, autoAlpha, timelines, 
 - Patterns: `useGSAP()` with `scope: containerRef`, refs for targets, no selectors without scope; cleanup is automatic on unmount.
 
 These examples are intended as reference implementations for AI agents and for quick manual verification of the skill patterns.
+
+## Vue
+
+- **examples/vue/** — Vite + Vue 3 + `<script setup>`.
+- From repo root: `cd examples/vue && npm install && npm run dev`.
+- Patterns: `gsap.context(() => {}, scope)` via `<script setup>`, `onMounted`/`onUnmounted` cleanup, ScrollTrigger on timeline, autoAlpha, stagger.
+
+## Nuxt
+
+- **examples/nuxt/** — Nuxt 4 with GSAP client-only re-usable composable.
+- From repo root: `cd examples/nuxt && npm install && npm run dev`.
+- Patterns: GSAP as client-only composable (`useGSAP.client.ts`), for gsap access, lazy-loading plugins, `gsap.context(() => {}, scope)` cleanup.
