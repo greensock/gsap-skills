@@ -2,6 +2,8 @@
 
 Use this file to discover which skill to load. Each skill lives in a directory of the same name under skills/ and contains SKILL.md.
 
+Note: GSAP is fully free (including every plugin) since Webflow's acquisition. Club GSAP is no longer a paid tier — formerly Club-only plugins (SplitText, MorphSVG, etc.) are free for commercial use. Install everything from the public `gsap` npm package (`npm install gsap`); no `.npmrc` / auth token or private registry required. See gsap-plugins for details.
+
 ## Skills
 
 gsap-core
@@ -17,8 +19,8 @@ gsap-scrolltrigger
   Triggers: scroll animation, scroll-driven animation, scroll animation library, parallax, pin section, ScrollTrigger, pin, scrub.
 
 gsap-plugins
-  Plugins: ScrollToPlugin, ScrollSmoother, Flip, Draggable, Inertia, Observer, SplitText, ScrambleText, SVG/physics, CustomEase, EasePack, GSDevTools.
-  Triggers: plugin, scroll-to, flip, draggable, SVG drawing, MorphSVG, DrawSVG, MotionPath, SplitText, ScrambleText, CustomEase, registerPlugin.
+  Plugins: ScrollToPlugin, ScrollSmoother, Flip, Draggable, Inertia, Observer, SplitText, ScrambleText, SVG/physics, CustomEase, EasePack, GSDevTools. All plugins are free (no Club GSAP membership or auth token needed); install everything from the public `gsap` npm package.
+  Triggers: plugin, scroll-to, flip, draggable, SVG drawing, MorphSVG, DrawSVG, MotionPath, SplitText, ScrambleText, CustomEase, registerPlugin, Club GSAP, GSAP membership, GSAP license, GSAP free, GSAP paid, GSAP commercial, bonus plugins, GreenSock auth token, .npmrc GSAP, private GSAP registry, Webflow GSAP.
 
 gsap-utils
   gsap.utils: clamp, mapRange, normalize, interpolate, random, snap, toArray, wrap, pipe.
