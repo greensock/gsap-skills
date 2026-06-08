@@ -75,6 +75,7 @@ Clone this repo and copy the skill folders into the appropriate directory for yo
 
 | Skill | Description |
 |-------|-------------|
+| **gsap** | Unified entry point: routes broad GSAP animation requests to the relevant official skill(s) below |
 | **gsap-core** | Core API: `gsap.to()` / `from()` / `fromTo()`, easing, duration, stagger, defaults |
 | **gsap-timeline** | Timelines: sequencing, position parameter, labels, nesting, playback |
 | **gsap-scrolltrigger** | ScrollTrigger: scroll-linked animations, pinning, scrub, triggers, refresh & cleanup |
@@ -137,8 +138,10 @@ gsap-skills/
   .claude-plugin/    # Claude Code plugin config (plugin.json, marketplace.json)
   .cursor-plugin/    # Cursor plugin config (plugin.json, marketplace.json)
   assets/            # Logo and icon assets (e.g. gsap-green.svg, gsap-icon-square.svg)
+  scripts/           # Validation helpers
   skills/
     llms.txt         # Skill index for agents (names, summaries, trigger terms)
+    gsap/            SKILL.md
     gsap-core/       SKILL.md
     gsap-timeline/   SKILL.md
     gsap-scrolltrigger/ SKILL.md
@@ -153,6 +156,10 @@ gsap-skills/
 ## GitHub Copilot
 
 Copilot doesn’t load Cursor/Claude skill files. To get GSAP guidance in a repo, copy or adapt the [`.github/copilot-instructions.md`](.github/copilot-instructions.md) (and optional [`.github/instructions/`](.github/instructions/) path-specific files) into that repo. See [GitHub Copilot customization](https://docs.github.com/en/copilot/concepts/response-customization).
+
+## Validation
+
+Run `node scripts/validate-skills.mjs` to verify skill frontmatter, the unified GSAP router, README entries, and the agent skill index.
 
 ## Risk level
 
