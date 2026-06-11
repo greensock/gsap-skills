@@ -232,7 +232,7 @@ A common pattern: **pin** a section, then as the user scrolls **vertically**, co
 const scrollingEl = document.querySelector(".horizontal-el");
 // Panel = pinned viewport-sized section. .horizontal-wrap = inner content that moves left.
 const scrollTween = gsap.to(scrollingEl, { 
-  xPercent: () => Max.max(0, window.innerWidth - scrollingEl.offsetWidth), 
+  xPercent: () => Math.max(0, window.innerWidth - scrollingEl.offsetWidth), 
   ease: "none", // ease: "none" is required
   scrollTrigger: {
     trigger: scrollingEl,

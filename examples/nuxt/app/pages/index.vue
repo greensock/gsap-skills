@@ -26,7 +26,7 @@ onMounted(async () => {
   });
 });
 
-onMounted(() => {
+onUnmounted(() => {
   ctx && ctx.revert();
 });
 </script>
