@@ -1,6 +1,9 @@
 /**
  * Minimal GSAP vanilla example — follows skills: transforms, autoAlpha, timeline, ScrollTrigger.
  * Run from repo root: npx serve examples/vanilla (or open index.html with a local server that supports ES modules).
+ *
+ * CDN imports below are for this zero-build demo only. Production apps should
+ * `npm install gsap` and bundle it rather than importing from a CDN at runtime.
  */
 import { gsap } from "https://cdn.jsdelivr.net/npm/gsap@3.15.0/index.js";
 import { ScrollTrigger } from "https://cdn.jsdelivr.net/npm/gsap@3.15.0/ScrollTrigger.js";
