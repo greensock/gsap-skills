@@ -1,8 +1,9 @@
 <script setup>
-import { onMounted, onUnmounted } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 
 const { gsap, ScrollTrigger, lazyLoadPlugin } = useGSAP();
 
+const container = ref(null);
 let ctx;
 onMounted(async () => {
   const SplitText = await lazyLoadPlugin("SplitText");
@@ -23,16 +24,16 @@ onMounted(async () => {
     });
 
     gsap.set("h1", { autoAlpha: 1 });
-  });
+  }, container.value);
 });
 
-onMounted(() => {
-  ctx && ctx.revert();
+onUnmounted(() => {
+  ctx?.revert();
 });
 </script>
 
 <template>
-  <main>
+  <main ref="container">
     <h1>GSAP SplitText</h1>
   </main>
 </template>

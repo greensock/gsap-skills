@@ -53,9 +53,9 @@ gsap.to(scrollContainer, { duration: 1, scrollTo: { x: "max" } });
 
 | Option | Description |
 |--------|-------------|
-| `x`, `y` | Target scroll position (number), or `"max"` for maximum |
-| `element` | Selector or element to scroll to (for scroll-into-view) |
+| `x`, `y` | Target scroll position: number, `"max"` for maximum, or a selector/element to scroll into view (e.g. `y: "#section"`) |
 | `offsetX`, `offsetY` | Offset in pixels from the target position |
+| `autoKill` | Kill the tween if the user scrolls manually; default `true` |
 
 ### ScrollSmoother
 
@@ -91,8 +91,8 @@ Flip.from(state, { duration: 0.5, ease: "power2.inOut" });
 | Option | Description |
 |--------|-------------|
 | `absolute` | Use `position: absolute` during the flip (default: `false`) |
-| `nested` | When true, only the first level of children is measured (better for nested transforms) |
-| `scale` | When true, scale elements to fit (avoids stretch); default `true` |
+| `nested` | When the container and its children are both Flip targets, performs extra calculations so child offsets don't compound with the parent's movement |
+| `scale` | When true, resizes via scaleX/scaleY instead of width/height; default `false` |
 | `simple` | When true, only position/scale are animated (faster, less accurate) |
 | `duration`, `ease` | Standard tween options |
 
@@ -167,7 +167,7 @@ Observer.create({
 | `target` | Element or selector to observe |
 | `onUp`, `onDown`, `onLeft`, `onRight` | Callbacks when swipe/scroll passes tolerance in that direction |
 | `tolerance` | Pixels before direction is detected; default 10 |
-| `type` | `"touch"`, `"pointer"`, or `"wheel"` (default: `"touch,pointer"`) |
+| `type` | `"wheel"`, `"touch"`, `"pointer"`, or `"scroll"` (default: `"wheel,touch,pointer"`) |
 
 ## Text
 
@@ -236,7 +236,7 @@ gsap.to(".text", {
 
 ### DrawSVG (DrawSVGPlugin)
 
-Reveals or hides the stroke of SVG elements by animating `stroke-dashoffset` / `stroke-dasharray`. Works on `<path>`, `<line>`, `<polyline>`, `<polygon>`, `<rect>`, `<ellipse>`. Use when “drawing” or “erasing” strokes.
+Reveals or hides the stroke of SVG elements by animating `stroke-dashoffset` / `stroke-dasharray`. Works on `<path>`, `<line>`, `<polyline>`, `<polygon>`, `<rect>`, `<ellipse>`, `<circle>`. Use when “drawing” or “erasing” strokes.
 
 **drawSVG value:** Describes the **visible segment** of the stroke along the path (start and end positions), not “animate from A to B over time.” Format: `"start end"` in percent or length. Examples: `"0% 100%"` = full stroke; `"20% 80%"` = stroke only between 20% and 80% (gaps at both ends). The tween animates from the element’s **current** segment to the **target** segment — e.g. `gsap.to("#path", { drawSVG: "0% 100%" })` goes from whatever it is now to full stroke. Single value (e.g. `0`, `"100%"`) means start is 0: `"100%"` is equivalent to `"0% 100%"`. 
 
@@ -328,9 +328,9 @@ gsap.to(".dot", {
 Visual editor for MotionPath (alignment, offset). Use during development to tune path alignment.
 
 ```javascript
-gsap.registerPlugin(MotionPathPlugin, MotionPathHelperPlugin);
+gsap.registerPlugin(MotionPathPlugin, MotionPathHelper);
 
-const helper = MotionPathHelper.create(".dot", "#path", { end: 0.5 });
+const helper = MotionPathHelper.create(".dot", { path: "#path", end: 0.5 });
 // adjust in UI, then use helper.path or helper.getProgress() in your animation
 ```
 
@@ -428,6 +428,6 @@ gsap.to(sprite, { pixi: { x: 200, y: 100, scale: 1.5 }, duration: 1 });
 - ❌ Use a plugin in a tween or API without registering it first (**gsap.registerPlugin()**).
 - ❌ Ship GSDevTools or development-only plugins to production.
 
-### Learn More
+## Learn More
 
 https://gsap.com/docs/v3/Plugins/

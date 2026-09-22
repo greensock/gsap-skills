@@ -281,4 +281,4 @@ wrapY(150); // 50
 
 ### Learn More
 
-https://gsap.com/docs/v3/HelperFunctions
+https://gsap.com/docs/v3/GSAP/UtilityMethods/

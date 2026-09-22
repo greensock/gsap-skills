@@ -20,7 +20,7 @@ Apply when writing or reviewing GSAP code in Vue (or Nuxt), Svelte (or SvelteKit
 
 ## Vue 3 (Composition API)
 
-See `examples/vue/` for a runnable Vite + Vue 3 project demonstrating these patterns.
+See [examples/vue/](https://github.com/greensock/gsap-skills/tree/main/examples/vue/) for a runnable Vite + Vue 3 project demonstrating these patterns.
 
 Use **onMounted** to run GSAP after the component is in the DOM. Use **onUnmounted** to clean up.
 
@@ -63,7 +63,6 @@ Same idea with `<script setup>` and refs:
 <script setup>
 import { onMounted, onUnmounted, ref } from "vue";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const container = ref(null);
 let ctx;
@@ -91,43 +90,16 @@ onUnmounted(() => {
 
 ## Nuxt 4
 
-> See `examples/nuxt/` for a runnable Nuxt 4 project with plugin registration, lazy loading, and SSR-safe patterns.
+> See [examples/nuxt/](https://github.com/greensock/gsap-skills/tree/main/examples/nuxt/) for a runnable Nuxt 4 project with plugin registration, lazy loading, and SSR-safe patterns.
 
 Use a **reusable composable** to register GSAP Plugins and also to lazy load Plugins that are not extensively used in your application:
 
 ```typescript
-// composables/useGSAP.ts
+// app/composables/useGSAP.ts
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const PLUGINS = [
-  "CSSRulePlugin",
-  "CustomBounce",
-  "CustomEase",
-  "CustomWiggle",
-  "Draggable",
-  "DrawSVGPlugin",
-  "EaselPlugin",
-  "EasePack",
-  "Flip",
-  "GSDevTools",
-  "InertiaPlugin",
-  "MorphSVGPlugin",
-  "MotionPathHelper",
-  "MotionPathPlugin",
-  "Observer",
-  "Physics2DPlugin",
-  "PhysicsPropsPlugin",
-  "PixiPlugin",
-  "ScrambleTextPlugin",
-  "ScrollSmoother",
-  "ScrollToPlugin",
-  "ScrollTrigger",
-  "SplitText",
-  "TextPlugin",
-] as const;
-
-type Plugins = (typeof PLUGINS)[number];
+gsap.registerPlugin(ScrollTrigger); // module scope: registers once on first import
 
 // In order to dynamically load all the GSAP plugins
 const pluginMap = {
@@ -166,8 +138,7 @@ type PluginModule<K extends Plugins> = Awaited<ReturnType<PluginMap[K]>>;
 type PluginExport<K extends Plugins> = PluginModule<K>[K & keyof PluginModule<K>];
 
 export default function () {
-  // Register all the GSAP Plugins you want at this point
-  gsap.registerPlugin(ScrollTrigger);
+  // Register any additional GSAP plugins you want eagerly loaded at this point
 
   /*
     If you want to lazy load some of the plugins that are
@@ -202,7 +173,7 @@ const { gsap, ScrollTrigger, lazyLoadPlugin } = useGSAP();
 
 ## Svelte
 
-Use **onMount** to run GSAP after the DOM is ready. Use the **returned cleanup function** from onMount (or track the context and clean up in a reactive block / component destroy) to revert. Svelte 5 uses a different lifecycle; the same principle applies: create in “mounted” and revert in “destroyed.”
+Use **onMount** to run GSAP after the DOM is ready. Use the **returned cleanup function** from onMount (or track the context and clean up in a reactive block / component destroy) to revert. **onMount still works in Svelte 5**; in runes mode the equivalent is a `$effect` with a teardown return — the same principle applies: create in “mounted” and revert in “destroyed.”
 
 ```javascript
 <script>
@@ -259,8 +230,8 @@ Do not create GSAP animations in the component’s setup or in a synchronous top
 - ❌ Create tweens or ScrollTriggers before the component is mounted (e.g. in setup without onMounted); the DOM nodes may not exist yet.
 - ❌ Use selector strings without a **scope** (pass the container to gsap.context() as the second argument) so selectors don’t match elements outside the component.
 - ❌ Skip cleanup; always call **ctx.revert()** in onUnmounted / onMount’s return so animations and ScrollTriggers are killed when the component is destroyed.
-- ❌ Register plugins inside a component body that runs every render (it doesn't hurt anything, it's just wasteful); register once at app level.
+- ❌ Register plugins inside per-component code paths (it doesn't hurt anything — registerPlugin is idempotent — it's just wasteful); register once at app/module level.
 
-### Learn More
+## Learn More
 
 - **gsap-react** skill for React-specific patterns (useGSAP, contextSafe).

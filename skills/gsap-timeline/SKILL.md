@@ -30,7 +30,7 @@ Third argument (or position property in vars) controls placement:
 - **Absolute**: `1` — start at 1 second.
 - **Relative (default)**: `"+=0.5"` — 0.5s after end; `"-=0.2"` — 0.2s before end.
 - **Label**: `"labelName"` — at that label; `"labelName+=0.3"` — 0.3s after label.
-- **Placement**: `"<"` — start when recently-added animation starts; `">"` — start when recently-added animation ends (default); `"<0.2"` — 0.2s after recently-added animation start.
+- **Placement**: `"<"` — start when recently-added animation starts; `">"` — start when recently-added animation ends; `"<0.2"` — 0.2s after recently-added animation start.
 
 Examples:
 
@@ -89,7 +89,7 @@ master.to(".c", { opacity: 0 }, "+=0.2");
 - **tl.restart()** — from start.
 - **tl.time(2)** — seek to 2 seconds.
 - **tl.progress(0.5)** — seek to 50%.
-- **tl.kill()** — kill timeline and (by default) its children.
+- **tl.kill()** — kill the timeline and its children.
 
 ## Official GSAP Best practices
 
