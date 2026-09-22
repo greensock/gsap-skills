@@ -39,7 +39,7 @@ useGSAP(() => {
 ```
 
 - ✅ Pass a **scope** (ref or element) so selectors like `.box` are scoped to that root.
-- ✅ Cleanup (reverting animations and ScrollTriggers) runs automatically on unmount.
+- ✅ Cleanup (reverting animations and ScrollTriggers) runs automatically on unmount — this also handles React 18 StrictMode's double-mount in development correctly.
 - ✅ Use **contextSafe** from the hook's return value to wrap callbacks (e.g. onComplete) so they no-op after unmount and avoid React warnings.
 
 ## Refs for Targets
@@ -55,7 +55,7 @@ useGSAP(() => {
 		// gsap code here, just like in a useEffect()
 },{ 
   dependencies: [endX], // dependency array (optional)
-  scope: container,     // scope selector text (optional, recommended)
+  scope: container,     // scope ref or element (optional, recommended)
   revertOnUpdate: true  // causes the context to be reverted and the cleanup function to run every time the hook re-synchronizes (when any dependency changes)
 });
 ```
@@ -126,7 +126,6 @@ GSAP runs in the browser. Do not call gsap or ScrollTrigger during SSR.
 ## Do Not
 
 - ❌ Target by **selector without a scope**; always pass **scope** (ref or element) in useGSAP or gsap.context() so selectors like `.box` are limited to that root and do not match elements outside the component.
-- ❌ Animate using selector strings that can match elements outside the current component unless a `scope` is defined in useGSAP or gsap.context() so only elements inside the component are affected.
 - ❌ Skip cleanup; always revert context or kill tweens/ScrollTriggers in the effect return to avoid leaks and updates on unmounted nodes.
 - ❌ Run GSAP or ScrollTrigger during SSR; keep all usage inside client-only lifecycle (e.g. useGSAP).
 

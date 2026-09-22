@@ -55,8 +55,8 @@ document.querySelector("#container").addEventListener("mousemove", (e) => {
 
 ## ScrollTrigger and Performance
 
-- **pin: true** promotes the pinned element; pin only what’s needed.
-- **scrub** with a small value (e.g. `scrub: 1`) can reduce work during scroll; test on low-end devices.
+- Pinning adds rendering cost (spacer element, `position: fixed` swapping); pin only what’s needed.
+- **scrub** with a number (e.g. `scrub: 1`) smooths the catch-up and can hide small hitches, but keeps animating briefly after scrolling stops; test on low-end devices.
 - Call **ScrollTrigger.refresh()** only when layout actually changes (e.g. after content load), not on every resize; debounce when possible.
 
 ## Reduce Simultaneous Work

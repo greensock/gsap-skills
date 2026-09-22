@@ -1,34 +1,7 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const PLUGINS = [
-  "CSSRulePlugin",
-  "CustomBounce",
-  "CustomEase",
-  "CustomWiggle",
-  "Draggable",
-  "DrawSVGPlugin",
-  "EaselPlugin",
-  "EasePack",
-  "Flip",
-  "GSDevTools",
-  "InertiaPlugin",
-  "MorphSVGPlugin",
-  "MotionPathHelper",
-  "MotionPathPlugin",
-  "Observer",
-  "Physics2DPlugin",
-  "PhysicsPropsPlugin",
-  "PixiPlugin",
-  "ScrambleTextPlugin",
-  "ScrollSmoother",
-  "ScrollToPlugin",
-  "ScrollTrigger",
-  "SplitText",
-  "TextPlugin",
-] as const;
-
-type Plugins = typeof PLUGINS[number];
+gsap.registerPlugin(ScrollTrigger); // module scope: registers once on first import
 
 // In order to dynamically load all the GSAP plugins 
 const pluginMap = {
@@ -67,8 +40,7 @@ type PluginModule<K extends Plugins> = Awaited<ReturnType<PluginMap[K]>>;
 type PluginExport<K extends Plugins> = PluginModule<K>[K & keyof PluginModule<K>];
 
 export default function() {
-  // Register all the GSAP Plugins you want at this point
-  gsap.registerPlugin(ScrollTrigger);
+  // Register any additional GSAP plugins you want eagerly loaded at this point
 
   /*
     If you want to lazy load some of the plugins that are

@@ -45,7 +45,7 @@ Main properties for the `scrollTrigger` config object (shorthand: `scrollTrigger
 
 | Property | Type | Description |
 |----------|------|-------------|
-| **trigger** | String \| Element | Element whose position defines where the ScrollTrigger starts. Required (or use shorthand). |
+| **trigger** | String \| Element | Element whose position defines where the ScrollTrigger starts. Optional — omit it to drive off raw scroll positions (e.g. `start: 0, end: "max"`). |
 | **start** | String \| Number \| Function | When the trigger becomes active. Default `"top bottom"` (or `"top top"` if `pin: true`). |
 | **end** | String \| Number \| Function | When the trigger ends. Default `"bottom top"`. Use `endTrigger` if end is based on a different element. |
 | **endTrigger** | String \| Element | Element used for **end** when different from trigger. |
@@ -53,6 +53,8 @@ Main properties for the `scrollTrigger` config object (shorthand: `scrollTrigger
 | **toggleActions** | String | Four actions in order: **onEnter**, **onLeave**, **onEnterBack**, **onLeaveBack**. Each: `"play"`, `"pause"`, `"resume"`, `"reset"`, `"restart"`, `"complete"`, `"reverse"`, `"none"`. Default `"play none none none"`. |
 | **pin** | Boolean \| String \| Element | Pin an element while active. `true` = pin the trigger. Don't animate the pinned element itself; animate children. |
 | **pinSpacing** | Boolean \| String | Default `true` (adds spacer so layout doesn't collapse). `false` or `"margin"`. |
+| **anticipatePin** | Number | e.g. `1` pre-renders the pin/spacer slightly early; prevents a visible jump when scrolling fast into a pinned section. |
+| **invalidateOnRefresh** | Boolean | Re-capture the tween's start/end values on refresh; required for function-based values to re-run on resize. |
 | **horizontal** | Boolean | `true` for horizontal scrolling. |
 | **scroller** | String \| Element | Scroll container (default: viewport). Use selector or element for a scrollable div. |
 | **markers** | Boolean \| Object | `true` for dev markers; or `{ startColor, endColor, fontSize, ... }`. Remove in production. |
@@ -225,20 +227,22 @@ A common pattern: **pin** a section, then as the user scrolls **vertically**, co
 
 1. Pin the section (trigger = the full-viewport panel).
 2. Build a tween that animates the inner content’s **x** or **xPercent** (e.g. to `x: () => (targets.length - 1) * -window.innerWidth` or a negative `xPercent` to move left). Use **ease: "none"** on that tween.
-3. Attach ScrollTrigger to that tween with **pin: true**, **scrub: true** 
+3. Attach ScrollTrigger to that tween with **pin** (on the wrapper, so the animated element isn't the pinned one) and **scrub: true**. Add **invalidateOnRefresh: true** so function-based values re-run on resize.
 4. To trigger things based on the horizontal movement caused by that tween, set **containerAnimation** to that tween. 
 
 ```javascript
 const scrollingEl = document.querySelector(".horizontal-el");
-// Panel = pinned viewport-sized section. .horizontal-wrap = inner content that moves left.
+// .horizontal-el = inner content that moves left; its parent is the pinned viewport-sized panel.
 const scrollTween = gsap.to(scrollingEl, { 
-  xPercent: () => Max.max(0, window.innerWidth - scrollingEl.offsetWidth), 
+  x: () => Math.min(0, window.innerWidth - scrollingEl.offsetWidth), // move left by the overflow amount
   ease: "none", // ease: "none" is required
   scrollTrigger: {
     trigger: scrollingEl,
     pin: scrollingEl.parentNode, // wrapper so that we're not animating the pinned element
     start: "top top",
-    end: "+=1000"
+    end: "+=1000",
+    scrub: true,
+    invalidateOnRefresh: true
   }
 }); 
 
@@ -258,7 +262,7 @@ gsap.to(".nested-el-1", {
 
 ## Refresh and Cleanup
 
-- **ScrollTrigger.refresh()** — recalculate positions (e.g. after DOM/layout changes, fonts loaded, or dynamic content). Automatically called on viewport resize, debounced 200ms. Refresh runs in creation order (or by **refreshPriority**); create ScrollTriggers top-to-bottom on the page or set **refreshPriority** so they refresh in that order.
+- **ScrollTrigger.refresh()** — recalculate positions (e.g. after DOM/layout changes, fonts loaded, or dynamic content). Automatically called on viewport resize, debounced 200ms. Refresh sorts triggers by **refreshPriority**, then by their position in the document; create ScrollTriggers top-to-bottom on the page or set **refreshPriority** so they refresh in that order.
 - When removing animated elements or changing pages (e.g. in SPAs), **kill** associated ScrollTrigger instances so they don’t run on stale elements:
 
 ```javascript
@@ -286,11 +290,10 @@ In React, use the `useGSAP()` hook (@gsap/react NPM package) to ensure proper cl
 - ❌ Forget to **gsap.registerPlugin(ScrollTrigger)** before using ScrollTrigger.
 - ❌ Use **scrub** and **toggleActions** together on the same ScrollTrigger; choose one behavior. If both exist, **scrub** wins.
 - ❌ Use an ease other than **"none"** on the horizontal animation when using **containerAnimation** for fake horizontal scroll; it breaks the 1:1 scroll-to-position mapping.
-- ❌ Create ScrollTriggers in random or async order without setting **refreshPriority**; refresh runs in creation order (or by refreshPriority), and wrong order can affect layout (e.g. pin spacing). Create them top-to-bottom or assign **refreshPriority** so they refresh in page order.
+- ❌ Create ScrollTriggers in random or async order without setting **refreshPriority**; refresh sorts by refreshPriority then document position, and wrong order can affect layout (e.g. pin spacing). Create them top-to-bottom or assign **refreshPriority** so they refresh in page order.
 - ❌ Leave **markers: true** in production.
-- ❌ Forget **refresh()** after layout changes (new content, images, fonts) that affect trigger positions; viewport resize is handled automatically.
 
-### Learn More
+## Learn More
 
 https://gsap.com/docs/v3/Plugins/ScrollTrigger/
 

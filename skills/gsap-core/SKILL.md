@@ -85,7 +85,7 @@ Relative values work: `x: "+=20"`, `rotation: "-=30"`. Default units: x/y in px,
 - **autoAlpha** — Prefer over `opacity` for fade in/out. When the value is `0`, GSAP also sets `visibility: hidden` (better rendering and no pointer events); when non-zero, `visibility` is set to `inherit`. Avoids leaving invisible elements blocking clicks.
 - **CSS variables** — GSAP can animate custom properties (e.g. `"--hue": 180`, `"--size": 100`). Supported in browsers that support CSS variables.
 - **svgOrigin** _(SVG only)_ — Like `transformOrigin` but in the SVG’s **global** coordinate space (e.g. `svgOrigin: "250 100"`). Use when several SVG elements should rotate or scale around a common point. Only one of `svgOrigin` or `transformOrigin` can be used. No percentage values; units optional.
-- **Directional rotation** — Append a suffix to rotation values (string): **`_short`** (shortest path), **`_cw`** (clockwise), **`_ccw`** (counter-clockwise). Applies to `rotation`, `rotationX`, `rotationY`. Example: `rotation: "-170_short"` (20° clockwise instead of 340° counter-clockwise); `rotationX: "+=30_cw"`.
+- **Directional rotation** — Append a suffix to rotation values (string): **`_short`** (shortest path), **`_cw`** (clockwise), **`_ccw`** (counter-clockwise). Applies to `rotation`, `rotationX`, `rotationY`. Example: `rotation: "-170_short"` (e.g. from a current rotation of 170°, rotates 20° clockwise instead of 340° counter-clockwise); `rotationX: "+=30_cw"`.
 - **clearProps** — Comma-separated list of property names (or `"all"` / `true`) to **remove** from the element’s inline style when the tween completes. Use when a class or other CSS should take over after the animation. Clearing any transform-related property (e.g. `x`, `scale`, `rotation`) clears the **entire** transform.
 
 ```javascript
@@ -143,6 +143,8 @@ base (out)        .in                .out               .inOut
 ```
 
 ### Custom: use CustomEase (plugin)
+
+Requires registering the plugin first: `gsap.registerPlugin(CustomEase)` (see gsap-plugins).
 
 Simple cubic-bezier values (as used in CSS `cubic-bezier()`): 
 
