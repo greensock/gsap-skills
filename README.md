@@ -48,6 +48,14 @@ The CLI auto-detects the installed agent. To target one explicitly (e.g. Antigra
 npx skills add https://github.com/greensock/gsap-skills --agent antigravity
 ```
 
+### GitHub CLI
+
+Or install with the [GitHub CLI](https://cli.github.com/manual/gh_skill):
+
+```bash
+gh skill install greensock/gsap-skills
+```
+
 ### Claude Code
 
 In Claude Code, use the skill/plugin marketplace: `/plugin marketplace add greensock/gsap-skills`. See [Agent Skills docs](https://docs.anthropic.com/en/docs/agents-and-tools/agent-skills/overview).
